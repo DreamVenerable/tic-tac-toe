@@ -34,10 +34,9 @@ class Game
 
   def done?
     @win_comb = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]]
-    symb_location = @arr.each_index.select { |i| @arr[i] == @symb }
     @done = false
 
-    if @win_comb.each_index.any? { |index| symb_location == @win_comb[index] }
+    if @win_comb.any? { |elem| elem.all? { |spot| @arr[spot] == @symb} }
       @done = true
       puts "#{@symb} wins!"
     elsif @arr.all? { |e| e != @symb }
