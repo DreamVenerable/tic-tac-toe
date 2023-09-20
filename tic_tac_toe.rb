@@ -8,19 +8,21 @@ class Game
     @symb = 'O'
   end
 
+  def start_game
+    until @done
+      choice
+      done?
+    end
+  end
+
+  private
+
   def board_update
     puts " #{@arr[0]} | #{@arr[1]} | #{@arr[2]} \n----------\n #{@arr[3]} | #{@arr[4]} | #{@arr[5]} \n----------\n #{@arr[6]} | #{@arr[7]} | #{@arr[8]} \n"
   end
 
   def place(spot)
     @arr[spot - 1] = @symb
-  end
-
-  def start_game
-    until @done
-      choice
-      done?
-    end
   end
 
   def done?
@@ -55,6 +57,4 @@ class Game
   end
 end
 
-game = Game.new
-
-game.start_game
+game = Game.new.start_game
