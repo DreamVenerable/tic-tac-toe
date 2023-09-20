@@ -2,13 +2,12 @@
 
 class Game
   def initialize
-    @board = "  |   |   \n----------\n  |   |  \n----------\n  |   |  \n"
-    puts @board
-    @arr = Array.new(9) { ' ' }
+    @arr = [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
     @symb = 'O'
   end
 
   def start_game
+    board_update
     until @done
       choice
       done?
@@ -18,7 +17,15 @@ class Game
   private
 
   def board_update
-    puts " #{@arr[0]} | #{@arr[1]} | #{@arr[2]} \n----------\n #{@arr[3]} | #{@arr[4]} | #{@arr[5]} \n----------\n #{@arr[6]} | #{@arr[7]} | #{@arr[8]} \n"
+    puts <<-HEREDOC
+
+       #{@arr[0]} | #{@arr[1]} | #{@arr[2]}
+      ---+---+---
+       #{@arr[3]} | #{@arr[4]} | #{@arr[5]}
+      ---+---+---
+       #{@arr[6]} | #{@arr[7]} | #{@arr[8]}
+
+    HEREDOC
   end
 
   def place(spot)
@@ -29,10 +36,11 @@ class Game
     @win_comb = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]]
     symb_location = @arr.each_index.select { |i| @arr[i] == @symb }
     @done = false
+
     if @win_comb.each_index.any? { |index| symb_location == @win_comb[index] }
       @done = true
       puts "#{@symb} wins!"
-    elsif @arr.all? { |e| e != ' ' }
+    elsif @arr.all? { |e| e != @symb }
       @done = true
       puts "It's a draw!"
     end
