@@ -39,7 +39,7 @@ class Game
   def choice
     puts 'Choose a spot: (1-9)'
     begin
-      spot = Kernel.gets.match(/[1-9]/)[0]
+      spot = gets.match(/[1-9]/)[0]
     rescue StandardError
       puts 'Erroneous input! Try again...'
       retry
