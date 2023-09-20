@@ -7,6 +7,7 @@ class Board
     @board = "  |   |   \n----------\n  |   |  \n----------\n  |   |  \n"
     puts @board
     @arr = Array.new(9) {' '}
+    @symb = 'O'
   end
 
   def board_update
@@ -14,7 +15,7 @@ class Board
   end
 
   def place(num)
-    @arr[num-1] = "X"
+    @arr[num-1] = "#{@symb}"
   end
 
   def start_game
@@ -25,7 +26,7 @@ class Board
   end
   
   def done?
-    symb_location = @arr.each_index.select{|i| @arr[i] == "X"}
+    symb_location = @arr.each_index.select{|i| @arr[i] == "#{@symb}"}
     @done = false
     if @@win_comb.each_index.any? { |index| symb_location == @@win_comb[index] }
       @done = true
@@ -36,29 +37,23 @@ class Board
 
   def get_choice
     puts "Choose a spot: (1-9)"
-
     begin
       num = Kernel.gets.match(/[1-9]/)[0]
     rescue
       puts "Erroneous input! Try again..."
       retry
     else
+      if @symb == 'X'
+        @symb = 'O' 
+      else
+        @symb = 'X'
+      end 
       place(num.to_i)
       board_update
     end 
   end
 end
-
-class Player < Board
-  def initialize(symbol)
-    @symbol = symbol
-  end
-end
  
-
-
 game = Board.new
-PlayerX = Player.new('X')
-PlayerY = Player.new('Y')
 
 game.start_game
