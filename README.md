@@ -1,4 +1,4 @@
-<h2 align="center"><u>Mastermind</u></h2>
+<h2 align="center"><u>Tic Tac Toe</u></h2>
 
 <p align="center">
 <br>
